@@ -1,0 +1,9 @@
+{
+  "name": "factory-waste-matchmaker",
+  "version": "1.0.0",
+  "description": "Root package.json to help Railway deploy the backend",
+  "scripts": {
+    "install": "cd backend && npm install",
+    "start": "cd backend && node server.js"
+  }
+}
