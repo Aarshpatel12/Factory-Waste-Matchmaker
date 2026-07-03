@@ -155,29 +155,14 @@ const googleLogin = async (req, res) => {
     
     // We use a placeholder client ID for the demo.
     // IN PRODUCTION: Move this to process.env.GOOGLE_CLIENT_ID
-    const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+    const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '722525855900-kdcap8al0ama698hkdtvbint3o0o229m.apps.googleusercontent.com';
     
     const { OAuth2Client } = require('google-auth-library');
     const client = new OAuth2Client(GOOGLE_CLIENT_ID);
     
-    // In a real scenario with a valid Client ID, we would verify the token:
-    // const ticket = await client.verifyIdToken({ idToken: token, audience: GOOGLE_CLIENT_ID });
-    // const payload = ticket.getPayload();
-    // const { email, name } = payload;
-    
-    // For this demo since the user hasn't provided a real Client ID yet,
-    // we'll bypass actual verification to prevent crashing and just decode the JWT manually.
-    // DO NOT DO THIS IN PRODUCTION!
-    const jwtDecode = require('jwt-decode');
-    let decoded;
-    try {
-      decoded = jwtDecode.jwtDecode ? jwtDecode.jwtDecode(token) : require('jwt-decode')(token);
-    } catch(e) {
-      // Fallback rough decode for demo if jwt-decode isn't available
-      decoded = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
-    }
-    
-    const { email, name } = decoded;
+    const ticket = await client.verifyIdToken({ idToken: token, audience: GOOGLE_CLIENT_ID });
+    const payload = ticket.getPayload();
+    const { email, name } = payload;
 
     let user = await User.findOne({ email });
 
