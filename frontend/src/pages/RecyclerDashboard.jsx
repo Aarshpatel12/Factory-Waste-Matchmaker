@@ -49,7 +49,7 @@ const RecyclerDashboard = () => {
   const fetchFavorites = async () => {
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
-      const { data } = await axios.get('http://localhost:5001/api/auth/me', config);
+      const { data } = await axios.get('/api/auth/me', config);
       // Ensure favorites is an array of IDs
       setFavorites(data.favorites.map(f => typeof f === 'object' ? f._id : f) || []);
     } catch (error) {
@@ -60,7 +60,7 @@ const RecyclerDashboard = () => {
   const fetchListings = async () => {
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
-      const { data } = await axios.get(`http://localhost:5001/api/listings?category=${categoryFilter}`, config);
+      const { data } = await axios.get(`/api/listings?category=${categoryFilter}`, config);
       setListings(data);
     } catch (error) {
       console.error(error);
@@ -71,7 +71,7 @@ const RecyclerDashboard = () => {
     setLoadingId(id);
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
-      const { data } = await axios.put(`http://localhost:5001/api/listings/${id}/claim`, {}, config);
+      const { data } = await axios.put(`/api/listings/${id}/claim`, {}, config);
       
       // Update local state to show claimed status and generator contact
       setListings(listings.map(listing => 
@@ -88,7 +88,7 @@ const RecyclerDashboard = () => {
   const toggleFavorite = async (id) => {
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
-      const { data } = await axios.put(`http://localhost:5001/api/auth/favorites/${id}`, {}, config);
+      const { data } = await axios.put(`/api/auth/favorites/${id}`, {}, config);
       setFavorites(data);
     } catch (error) {
       console.error('Failed to toggle favorite', error);
@@ -99,7 +99,7 @@ const RecyclerDashboard = () => {
     e.preventDefault();
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
-      await axios.post('http://localhost:5001/api/reviews', {
+      await axios.post('/api/reviews', {
         rating: reviewState.rating,
         comment: reviewState.comment,
         generatorId,

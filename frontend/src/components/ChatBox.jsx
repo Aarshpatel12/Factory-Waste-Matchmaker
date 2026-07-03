@@ -17,7 +17,7 @@ const ChatBox = ({ listingId, receiverId, receiverName, onClose }) => {
   const fetchMessages = async () => {
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
-      const { data } = await axios.get(`http://localhost:5001/api/messages/${listingId}`, config);
+      const { data } = await axios.get(`$1/api/messages/${listingId}`, config);
       setMessages(data);
     } catch (error) {
       console.error(error);
@@ -30,7 +30,7 @@ const ChatBox = ({ listingId, receiverId, receiverName, onClose }) => {
 
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
-      const { data } = await axios.post('http://localhost:5001/api/messages', {
+      const { data } = await axios.post('/api/messages', {
         receiverId,
         listingId,
         content: newMessage

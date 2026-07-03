@@ -4,6 +4,9 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import App from './App.jsx';
 import './index.css';
 import { AuthProvider } from './context/AuthContext.jsx';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://factory-waste-matchmaker-production.up.railway.app';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const { data } = await axios.post('http://localhost:5001/api/auth/login', { email, password });
+      const { data } = await axios.post('/api/auth/login', { email, password });
       setUser(data);
       localStorage.setItem('userInfo', JSON.stringify(data));
       return { success: true };
@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (name, email, password, role) => {
     try {
-      const { data } = await axios.post('http://localhost:5001/api/auth/register', { name, email, password, role });
+      const { data } = await axios.post('/api/auth/register', { name, email, password, role });
       setUser(data);
       localStorage.setItem('userInfo', JSON.stringify(data));
       return { success: true };
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
 
   const googleLogin = async (token) => {
     try {
-      const response = await axios.post('http://localhost:5001/api/auth/google', { token });
+      const response = await axios.post('/api/auth/google', { token });
       localStorage.setItem('userInfo', JSON.stringify(response.data));
       setUser(response.data);
       return { success: true, data: response.data };

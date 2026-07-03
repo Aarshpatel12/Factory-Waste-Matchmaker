@@ -12,7 +12,7 @@ const Leaderboard = () => {
 
   const fetchLeaders = async () => {
     try {
-      const { data } = await axios.get('http://localhost:5001/api/auth/leaderboard');
+      const { data } = await axios.get('/api/auth/leaderboard');
       setLeaders(data);
     } catch (error) {
       console.error(error);

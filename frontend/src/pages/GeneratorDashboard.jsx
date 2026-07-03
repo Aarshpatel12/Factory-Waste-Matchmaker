@@ -23,7 +23,7 @@ const GeneratorDashboard = () => {
   const fetchMyListings = async () => {
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
-      const { data } = await axios.get('http://localhost:5001/api/listings/my-listings', config);
+      const { data } = await axios.get('/api/listings/my-listings', config);
       setListings(data);
     } catch (error) {
       console.error(error);
@@ -46,7 +46,7 @@ const GeneratorDashboard = () => {
     setLoading(true);
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
-      await axios.post('http://localhost:5001/api/listings', formData, config);
+      await axios.post('/api/listings', formData, config);
       setShowForm(false);
       setFormData({ title: '', category: 'Textiles', quantity: '', description: '', location: '', image: '' });
       fetchMyListings();

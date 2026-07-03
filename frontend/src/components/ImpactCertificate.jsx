@@ -15,7 +15,7 @@ const ImpactCertificate = () => {
   const fetchStats = async () => {
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
-      const { data } = await axios.get('http://localhost:5001/api/auth/impact-stats', config);
+      const { data } = await axios.get('/api/auth/impact-stats', config);
       setStats(data);
     } catch (error) {
       console.error(error);
